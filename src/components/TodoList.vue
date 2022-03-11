@@ -1,5 +1,11 @@
 <script>
+
+  import TodoItem from "./TodoItem.vue";
+
   export default{
+    components: {
+      TodoItem
+    },
     data(){
       return {
         list: JSON.parse(localStorage.getItem('todolist') || '[]')
@@ -24,15 +30,18 @@
     <h1>TodoList</h1>
     <input type="text" @keyup.enter="addTodoItem">
     <ul>
-      <li v-for="item, index in list" :key="index">
-        {{item.value}}
-      </li>
+      <TodoItem
+        v-for="item, index in list"
+        :key="index"
+        :item="item"
+      />
     </ul>
   </div>
 </template>
 
 <style scoped>
-a {
-  color: #42b983;
-}
+  ul{
+    list-style: none;
+    padding: 0;
+  }
 </style>
