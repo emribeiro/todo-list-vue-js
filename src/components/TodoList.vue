@@ -1,0 +1,38 @@
+<script>
+  export default{
+    data(){
+      return {
+        list: JSON.parse(localStorage.getItem('todolist') || '[]')
+      }
+    },
+    methods: {
+      addTodoItem(event){
+          this.list.unshift({
+            value: event.target.value,
+            checked: false
+          });
+
+          localStorage.setItem('todolist', JSON.stringify(this.list));
+          event.target.value = '';
+      }
+    }
+  }
+</script>
+
+<template>
+  <div class="container">
+    <h1>TodoList</h1>
+    <input type="text" @keyup.enter="addTodoItem">
+    <ul>
+      <li v-for="item, index in list" :key="index">
+        {{item.value}}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<style scoped>
+a {
+  color: #42b983;
+}
+</style>
